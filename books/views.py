@@ -15,8 +15,10 @@ def book_list_view(request):
 def book_detail_view(request, id):
     if request.method == "GET":
         book_id = get_object_or_404(models.Books, id=id)
+        avg_rating = book_id.average_rating()  #
         context = {
             'book_id' : book_id,
+            'avg_rating': avg_rating
         }
         return render(request, template_name='books/book_detail.html', context=context)
         

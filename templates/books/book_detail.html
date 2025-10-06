@@ -4,3 +4,18 @@
     <p>{{ book_id.quatity_page }}</p> 
     <iframe src="{{ book_id.book_audio }}" frameborder="0"></iframe>
     <p>{{ book_id.created_at }}</p>
+
+    <h3>Средняя Оценка отзывов: {{ avg_rating|floatformat:1 }}
+         </h3>
+
+    <ul>
+        {% for i in book_id.reviews.all %}
+
+        <li>
+            <p>Оценка:{{ i.mark }}</p>
+            <p>{{ i.review_text }}</p>
+            <p>{{ i.created_at }}</p>
+        </li>
+
+        {% endfor %}
+    </ul>
