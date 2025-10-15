@@ -1,0 +1,22 @@
+<h2>Добро пожаловать, {{ worker.username }}</h2>
+
+<p>Логин: {{ worker.username }}</p>
+<p>Email: {{ worker.email }}</p>
+<p>Телефон: {{ worker.phone_number }}</p>
+<p>Должность: {{ worker.work }}</p>
+<p>Навыки: {{ worker.skill }}</p>
+<p>Опыт: {{ worker.experience_work }}</p>
+<p>GitHub: <a href="{{ worker.url_github }}" target="_blank" rel="noopener noreferrer">{{ worker.url_github }}</a></p>
+<p>Дата регистрации: {{ worker.created_at|date:"d.m.Y H:i" }}</p>
+<p>Сертификат: 
+  {% if worker.image %}
+    <img src="{{ worker.image.url }}" alt="Certificate" width="200">
+  {% else %}
+    Нет сертификата
+  {% endif %}
+</p>
+
+<form action="{% url 'users:logout' %}" method="post">
+  {% csrf_token %}
+  <button type="submit">Выйти</button>
+</form>
