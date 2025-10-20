@@ -3,24 +3,39 @@ from django.http import HttpResponse
 from datetime import datetime
 import random
 from . import models
+from django.views import generic
 
-def book_list_view(request):
-    if request.method == "GET":
-        books = models.Books.objects.all()
-        context = {
-            'books': books,
-        }
-        return render(request, template_name='books/books_list.html', context=context)
 
-def book_detail_view(request, id):
-    if request.method == "GET":
-        book_id = get_object_or_404(models.Books, id=id)
-        avg_rating = book_id.average_rating()  #
-        context = {
-            'book_id' : book_id,
-            'avg_rating': avg_rating
-        }
-        return render(request, template_name='books/book_detail.html', context=context)
+
+class BookListView(generic.ListView):
+    model = models.Books
+    template_name = 'books/books_list.html'
+    context_object_name = 'books'
+
+# def book_list_view(request):
+#     if request.method == "GET":
+#         books = models.Books.objects.all()
+#         context = {
+#             'books': books,
+#         }
+#         return render(request, template_name='books/books_list.html', context=context)
+
+class BookDetailView(generic.DetailView):
+    template_name = 'books/book_detail.html'
+    context_object_name = 'book_id'
+
+    def get_object(self, *args, **kwargs):
+        book_id = self.kwargs.get('id')
+        return get_object_or_404(models.Books, id=book_id)
+# def book_detail_view(request, id):
+#     if request.method == "GET":
+#         book_id = get_object_or_404(models.Books, id=id)
+#         avg_rating = book_id.average_rating()  #
+#         context = {
+#             'book_id' : book_id,
+#             'avg_rating': avg_rating
+#         }
+#         return render(request, template_name='books/book_detail.html', context=context)
         
 
 def current_time_view(request):

@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">Навбар</a>
+    <a class="navbar-brand" href="#">Книги</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Переключатель навигации">
       <span class="navbar-toggler-icon"></span>
     </button>
@@ -10,23 +10,23 @@
           <a class="nav-link active" aria-current="page" href="#">Главная</a>
         </li>
         <li class="nav-item">
-          <a href="{% url 'current_time' %}" class="nav-link" href="#">Урок 1</a>
+          <a href="{% url 'current_time' %}" class="nav-link" href="#">Текущее время</a>
         </li>
 
         <li class="nav-item">
-          <a class="nav-link" href="#">Урок 2</a>
+          <a class="nav-link" href="{% url 'myself_story' %}">Обо мне</a>
         </li>
 
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-            Выпадающий список
+            Дополнительное
           </a>
           <ul class="dropdown-menu">
-            <li><a class="dropdown-item" href="{% url 'basket_list' %}">TODO</a></li>
+            <li><a class="dropdown-item" href="{% url 'basket_list' %}">Заказ книги</a></li>
             <li><a class="dropdown-item" href="{% url 'users:register' %}">Регистрация</a></li>
             <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item" href="#">Авторизация</a></li>
-            <li><a class="dropdown-item" href="{% url 'all_clothes' %}">Хэштеги</a></li>
+            <li><a class="dropdown-item" href="{% url 'random_number'%}">Рандомное число</a></li>
+            <li><a class="dropdown-item" href="{% url 'all_clothes' %}">Одежда</a></li>
           </ul>
         </li>
       </ul>
