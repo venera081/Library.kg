@@ -1,20 +1,15 @@
-{% extends 'base.html' %}
+{% extends "CineBoard/base.html" %}
 {% block content %}
-  <h1>Список фильмов</h1>
-
-
-  <a href="{% url 'CineBoard:film_add' %}" class="btn btn-success">Добавить фильм</a>
-
-  <ul>
-    {% for film in films %}
-      <li>
-        <h3>{{ film.title }}</h3>
-        <p>{{ film.description|truncatewords:20 }}</p>
-        <p>Средний рейтинг: {{ film.avg_rating|default:"-" }}</p>
+<h1>Список фильмов</h1>
+<ul>
+{% for film in films %}
+    <li>
+        <h2>{{ film.title }}</h2>
+        <p>{{ film.description|truncatechars:100 }}</p>
         <a href="{% url 'CineBoard:film_detail' film.pk %}">Подробнее</a>
-      </li>
-    {% empty %}
-      <p>Фильмов пока нет.</p>
-    {% endfor %}
-  </ul>
+    </li>
+{% empty %}
+    <li>Фильмов пока нет</li>
+{% endfor %}
+</ul>
 {% endblock %}
