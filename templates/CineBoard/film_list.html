@@ -1,0 +1,15 @@
+{% extends "CineBoard/base.html" %}
+{% block content %}
+<h1>Список фильмов</h1>
+<ul>
+{% for film in films %}
+    <li>
+        <h2>{{ film.title }}</h2>
+        <p>{{ film.description|truncatechars:100 }}</p>
+        <a href="{% url 'CineBoard:film_detail' film.pk %}">Подробнее</a>
+    </li>
+{% empty %}
+    <li>Фильмов пока нет</li>
+{% endfor %}
+</ul>
+{% endblock %}

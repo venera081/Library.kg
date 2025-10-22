@@ -1,0 +1,27 @@
+{% extends "CineBoard/base.html" %}
+{% block content %}
+<h1>Контрольная работа</h1>
+
+<form method="get" action="{% url 'CineBoard:film_search' %}">
+    <input type="text" name="q" placeholder="Поиск">
+    <button type="submit">Найти</button>
+</form>
+
+<a href="{% url 'CineBoard:film_add' %}">Добавить фильм</a>
+
+<ul>
+{% for film in films %}
+    <li>
+        <a href="{% url 'CineBoard:film_detail' film.pk %}">{{ film.title }}</a>
+        - {{ film.genre }} | Средний рейтинг: {{ film.avg_rating|default:"0.0" }}
+        <a href="{% url 'CineBoard:film_edit' film.pk %}">Изменить</a>
+        <a href="{% url 'CineBoard:film_delete' film.pk %}">Удалить</a>
+        <br>
+        Теги:
+        {% for tag in film.tags.all %}
+            <a href="{% url 'CineBoard:film_tag' tag.name %}">#{{ tag.name }}</a>
+        {% endfor %}
+    </li>
+{% endfor %}
+</ul>
+{% endblock %}

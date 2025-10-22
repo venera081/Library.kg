@@ -1,0 +1,32 @@
+{% extends "CineBoard/base.html" %}
+
+{% block content %}
+<h1>{{ film.title }}</h1>
+<p><strong>Описание:</strong> {{ film.description }}</p>
+<p><strong>Жанр:</strong> {{ film.genre }}</p>
+<p><strong>Дата добавления:</strong> {{ film.created_at|date:"d.m.Y" }}</p>
+
+{% if film.image %}
+    <img src="{{ film.image.url }}" alt="{{ film.title }}" width="300">
+{% endif %}
+
+<h2>Комментарии:</h2>
+<ul>
+{% for review in film.reviews.all %}
+    <li><strong>{{ review.author.username }}</strong>: {{ review.text }}</li>
+{% empty %}
+    <li>Комментариев пока нет</li>
+{% endfor %}
+</ul>
+
+{% if user.is_authenticated %}
+<form action="{% url 'CineBoard:add_comment' pk=film.pk %}" method="post">
+    {% csrf_token %}
+    <textarea name="text" rows="3" placeholder="Написать комментарий..." required></textarea><br>
+    <button type="submit">Добавить комментарий</button>
+</form>
+{% else %}
+<p>Войдите, чтобы оставить комментарий.</p>
+{% endif %}
+{% endblock %}
+

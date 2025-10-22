@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CineBoard</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+        Привет, {{ user.username }} | <a href="{% url 'CineBoard:logout' %}">Выйти</a>
+    {% else %}
+        <a href="{% url 'CineBoard:login_cine' %}">Вход</a> |
+        <a href="{% url 'CineBoard:register_cine' %}">Регистрация</a>
+    {% endif %}
+    <hr>
+    {% block content %}{% endblock %}
+</body>
+</html>
