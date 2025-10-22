@@ -37,10 +37,6 @@ class LoginCineView(generic.FormView):
 
 
 
-from django.contrib.auth import logout
-from django.shortcuts import redirect
-from django.views import View
-
 class LogoutCineView(View):
     def get(self, request, *args, **kwargs):
         logout(request)
@@ -114,13 +110,6 @@ class FilmTagView(ListView):
         tag_name = self.kwargs['tag']
         return Film.objects.filter(tags__name=tag_name).annotate(avg_rating=Avg('reviews__mark')).order_by('-avg_rating')
 
-
-
-
-from django.views import View
-from django.shortcuts import redirect, get_object_or_404, render
-from .models import Film, Review
-from .forms import ReviewForm
 
 class AddCommentView(View):
     def post(self, request, pk):
