@@ -16,6 +16,8 @@
         - {{ film.genre }} | Средний рейтинг: {{ film.avg_rating|default:"0.0" }}
         <a href="{% url 'CineBoard:film_edit' film.pk %}">Изменить</a>
         <a href="{% url 'CineBoard:film_delete' film.pk %}">Удалить</a>
+        <a href="{% url 'CineBoard:film_add' %}" class="btn btn-success">Добавить фильм</a>
+
         <br>
         Теги:
         {% for tag in film.tags.all %}

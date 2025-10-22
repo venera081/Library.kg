@@ -1,9 +1,12 @@
-{% extends "CineBoard/base.html" %}
+{% extends 'base.html' %}
 {% block content %}
-<h1>Добавить/Редактировать фильм</h1>
-<form method="post">
+  <h2>{% if form.instance.pk %}Редактировать фильм{% else %}Добавить фильм{% endif %}</h2>
+
+  <form method="post" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form.as_p }}
-    <button type="submit">Сохранить</button>
-</form>
+    <button type="submit" class="btn btn-primary">Сохранить</button>
+  </form>
+
+  <a href="{% url 'CineBoard:film_list' %}">Назад к списку фильмов</a>
 {% endblock %}
